@@ -1,0 +1,116 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.SatisHaraket
+@{
+    ViewBag.Title = "SatisGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Satış Güncelleme</h2>
+<br />
+@using (Html.BeginForm("SatisGuncelle", "Satis", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.SatisID)
+    <label>Cari</label>
+    @Html.DropDownListFor(a => a.CariID, new SelectList(ViewBag.carilist, "Value", "Text", null), "Cari Seçin", new { @class = "form-control", id = "CariID" })
+    <span id="cariError" style="color: red;"></span>
+    <br />
+    <label>Ürün</label>
+    @Html.DropDownListFor(a => a.UrunID, new SelectList(ViewBag.urunlist, "Value", "Text", null), "Kategori Seçin", new { @class = "form-control", id = "UrunID" })
+    <span id="urunError" style="color: red;"></span>
+    <br />
+    <label>Personel</label>
+    @Html.DropDownListFor(a => a.PesonelID, new SelectList(ViewBag.persList, "Value", "Text", null), "Personel Seçin", new { @class = "form-control", id = "PesonelID" })
+    <span id="perError" style="color: red;"></span>
+    <br />
+    <label>Adet</label>
+    @Html.TextBoxFor(a => a.Adet, new { @class = "form-control" })
+    <br />
+    <label>Fiyat</label>
+    @Html.TextBoxFor(a => a.Fiyat, new { @class = "form-control" })
+    <br />
+    <label>Toplam Tutar</label>
+    @Html.TextBoxFor(a => a.ToplamTutar, new { @class = "form-control" })
+    <br />
+    <label>Tarih</label>
+    @Html.TextBoxFor(a => a.Tarih, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-warning">Güncelle</button>
+
+}
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+
+        // Tarih alanına jQuery UI Datepicker'ı bağlama
+        $("#Tarih").datepicker({
+            dateFormat: 'dd.mm.yy', // Tarih formatı
+            changeMonth: true,      // Ay seçiciyi göster
+            changeYear: true,       // Yıl seçiciyi göster
+        });
+
+        $('#CariID').change(function () {
+            var selectedValue = $(this).val();
+            var errorSpan = $('#cariError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+            } else {
+                errorSpan.text(""); // Hata mesajını temizle
+            }
+        });
+        $('#UrunID').change(function () {
+            var selectedValue = $(this).val();
+            var errorSpan = $('#urunError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+            } else {
+                errorSpan.text(""); // Hata mesajını temizle
+            }
+        });
+        $('#PesonelID').change(function () {
+            var selectedValue = $(this).val();
+            var errorSpan = $('#perError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+            } else {
+                errorSpan.text(""); // Hata mesajını temizle
+            }
+        });
+
+        // Form gönderildiğinde kontrolü yap
+        $('form').submit(function (e) {
+            var selectedValue = $('#CariID').val();
+            var errorSpan = $('#cariError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+                e.preventDefault(); // Formun gönderilmesini engelle
+            }
+        });
+        $('form').submit(function (e) {
+            var selectedValue = $('#UrunID').val();
+            var errorSpan = $('#urunError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+                e.preventDefault(); // Formun gönderilmesini engelle
+            }
+        });
+        $('form').submit(function (e) {
+            var selectedValue = $('#PesonelID').val();
+            var errorSpan = $('#perError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+                e.preventDefault(); // Formun gönderilmesini engelle
+            }
+        });
+    });
+</script>

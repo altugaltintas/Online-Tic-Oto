@@ -1,0 +1,38 @@
+﻿@using Online_Tic_Oto.Models.Sınıflar
+@model List<SatisHaraket>
+@{
+    ViewBag.Title = "DepartmanPersonelSatis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Personel Satis</h2>
+<br />
+<ol class="breadcrumb mb-4" style="background-color: #f2f2f2; border-radius:10px; padding:10px;">
+    <li class="breadcrumb-item active" style="margin-left:10px;">   Personel Adı: @ViewBag.d_pers</li>
+</ol>
+<table class="table table-condensed">
+    <tr>
+        <th>Satış ID</th>
+        <th>Ürün</th>
+        <th>Cari</th>
+        <th>Adet</th>
+        <th>Fiyat</th>
+        <th>Toplam</th>
+        <th>Tarih</th>
+        <th>Yazdır</th>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.SatisID</td>
+            <td>@a.Urun.UrunAD</td>
+            <td>@a.Cariler.CariADI @a.Cariler.CariSoyadı</td>
+            <td>@a.Adet</td>
+            <td>@a.Fiyat</td>
+            <td>@a.ToplamTutar</td>
+            <td>@a.Tarih.ToString("dd.MM.yyyy")</td>
+            <td><a href="#" class="btn btn-primary btn-sm" >Yazdır</a></td>
+        </tr>
+    }
+
+</table>

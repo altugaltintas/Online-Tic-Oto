@@ -1,0 +1,50 @@
+﻿@using Online_Tic_Oto.Models.Sınıflar
+@model List<Urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h4>Ürün Listesi</h4>
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>ID</th>
+        <th>ürün</th>
+        <th>Kategori</th>
+        <th>Marka</th>
+        <th>Stok</th>
+        <th>Alış Fiyat</th>
+        <th>Satış Fiyat</th>
+        <th>Görsel</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.UrunID</td>
+            <td>@u.UrunAD</td>
+            <td>@u.Ketegori.KategoriADI</td>
+            <td>@u.Marka</td>
+            <td>@u.Stok</td>
+            <td>@u.AlisFiyat</td>
+            <td>@u.SatisFiyat</td>
+            <td>@u.UrunGorsel</td>
+            <td><a href="#" class="btn btn-danger" onclick="confirmDelete('@u.UrunID')">Sil</a></td>
+            <td><a href="/Urun/UrunGetir/@u.UrunID" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+
+
+
+</table>
+<a href="/Urun/UrunEkle" class="btn btn-primary">Yeni Ürün</a>
+<script>
+    function confirmDelete(UrunID) {
+        if (confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
+            // Kullanıcı "Evet" dediğinde silme işlemini gerçekleştirin
+            window.location.href = '/Urun/UrunSil/' + UrunID;
+        }
+    }
+</script>
+

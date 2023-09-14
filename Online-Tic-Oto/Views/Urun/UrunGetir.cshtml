@@ -1,0 +1,62 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Urun
+@{
+    ViewBag.Title = "UrunGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Ürün Güncelleme</h2>
+<br />
+@using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
+{
+    @Html.HiddenFor(a=> a.UrunID)
+    <label>Ürün Adı</label>
+    @Html.TextBoxFor(a => a.UrunAD, new { @class = "form-control" })
+    <br />
+    <label>Kategori</label>
+    @Html.DropDownListFor(a => a.KategoriID, new SelectList(ViewBag.Kategoriler, "Value", "Text", null), "Kategori Seçin", new { @class = "form-control", id = "KategoriID" })
+    <span id="kategoriError" style="color: red;"></span>
+    <br />
+    <label>Marka</label>
+    @Html.TextBoxFor(a => a.Marka, new { @class = "form-control" })
+    <br />
+    <label>Stok Miktarı</label>
+    @Html.TextBoxFor(a => a.Stok, new { @class = "form-control" })
+    <br />
+    <label>Alış Fiyat</label>
+    @Html.TextBoxFor(a => a.AlisFiyat, new { @class = "form-control" })
+    <br />
+    <label>Satış Fiyat</label>
+    @Html.TextBoxFor(a => a.SatisFiyat, new { @class = "form-control" })
+    <br />
+    <label>Ürün Görseli</label>
+    @Html.TextBoxFor(a => a.UrunGorsel, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-warning">Güncelle</button>
+
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#KategoriID').change(function () {
+            var selectedValue = $(this).val();
+            var errorSpan = $('#kategoriError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+            } else {
+                errorSpan.text(""); // Hata mesajını temizle
+            }
+        });
+
+        // Form gönderildiğinde kontrolü yap
+        $('form').submit(function (e) {
+            var selectedValue = $('#KategoriID').val();
+            var errorSpan = $('#kategoriError');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir kategori seçin.");
+                e.preventDefault(); // Formun gönderilmesini engelle
+            }
+        });
+    });
+</script>

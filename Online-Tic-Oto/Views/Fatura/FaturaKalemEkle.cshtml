@@ -1,0 +1,87 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.FaturaKalem
+@{
+    ViewBag.Title = "FaturaKalemEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Fatura Kalem Girişi </h2>
+<br />
+<form class="form-group" method="post">
+    <ol class="breadcrumb mb-4" style="background-color: #f2f2f2; border-radius:10px; padding:10px;">
+        <li class="breadcrumb-item active" style="margin-left:10px;">   Fatura No düzenle: @ViewBag.dft2</li>
+    </ol>
+    <label>Fatura Seri</label>
+    @Html.DisplayFor(a => a.FaturaID, new { @class = "form-control" })
+    <br />
+    <br />
+    <br />
+    <button type="button" class="btn btn-success add-row">Yeni Satır Ekle</button>
+    <button class="btn btn-info">Satış</button>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Açıklama</th>
+                <th>Miktar</th>
+                <th>Birim Fiyat</th>
+                <th>Toplam Tutar</th>
+                <th>Fatura ID</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sale-row">
+                <td>
+                    @Html.TextBoxFor(a => a.FaturaAciklama, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.Miktar, new { @class = "form-control" })
+                <td>
+                    @Html.TextBoxFor(a => a.BirimFiyat, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.Tutar, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.FaturaID, new { @class = "form-control" })
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Satırı Sil</button>
+                </td>
+            </tr>
+            <!-- Kullanıcı daha fazla ürün satışı eklemek istediğinde yeni satırlar ekleyebilirsiniz -->
+        </tbody>
+    </table>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Yeni satır eklemek için düğme
+        $('.add-row').click(function () {
+            var newRow = $('tbody tr.sale-row:first').clone();
+            newRow.find('input').val('');
+            newRow.find('.total-amount').val('0.00');
+            $('tbody').append(newRow);
+        });
+
+        // Satırı silmek için düğme
+        $('tbody').on('click', '.remove-row', function () {
+            var rows = $('tbody tr.sale-row');
+            if (rows.length === 1) {
+                alert('Son satırı silemezsiniz.');
+            } else {
+                $(this).closest('tr').remove();
+            }
+        });
+
+        $('tbody').on('input', '.quantity-input, .price-input', function () {
+            var row = $(this).closest('tr');
+            var quantity = parseFloat(row.find('.quantity-input').val()) || 0;
+            var price = parseFloat(row.find('.price-input').val()) || 0;
+            var total = quantity * price;
+            row.find('.total-amount').val(total.toFixed(2));
+        });
+    });
+</script>

@@ -1,0 +1,35 @@
+﻿@using Online_Tic_Oto.Models.Sınıflar
+@model List<Personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h4>Personel Listesi</h4>
+<table class="table table-bordered" style="margin-top:20px;">
+
+    <tr>
+        <th>ID</th>
+        <th>Adı</th>
+        <th>Soyadı</th>
+        <th>Personel Resmi</th>
+        <th>Departman</th>
+        <th>Güncelle</th>
+        <th>Satışlar</th>
+    </tr>
+
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.PesonelID</td>
+            <td>@k.PersonelAD</td>
+            <td>@k.PersonelSoyad</td>
+            <td>@k.PersonelGorsel</td>
+            <td>@k.Departman.DepartmanADI</td>
+            <td><a href="/Personel/PersonelGetir/@k.PesonelID" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Departman/DepartmanPersonelSatis/@k.PesonelID" class="btn btn-success" style="background-color:dimgrey">Detay</a></td>
+
+        </tr>
+    }
+</table>
+<a href="/Personel/PersonelEkle" class="btn btn-primary">Personel Ekle</a>

@@ -1,0 +1,54 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Personel
+@{
+    ViewBag.Title = "PersonelGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Personel Güncelleme</h2>
+<br />
+@using (Html.BeginForm("PersonelGüncelle", "Personel", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.PesonelID)
+    <label>Adı</label>
+    @Html.TextBoxFor(a => a.PersonelAD, new { @class = "form-control" })
+    <br />
+    <label>Soyadı</label>
+    @Html.TextBoxFor(a => a.PersonelSoyad, new { @class = "form-control" })
+    <br />
+    <label>Personel Resmi</label>
+    @Html.TextBoxFor(a => a.PersonelGorsel, new { @class = "form-control" })
+    <br />
+    <label> Departman </label>
+    @Html.DropDownListFor(a => a.DepartmanID, new SelectList(ViewBag.deplist2, "Value", "Text", null), "Departman Secin", new { @class = "form-control", id = "DepartmanID" })
+    <span id="deparmanerror" style="color: red;"></span>
+    <br />
+
+    <button class="btn btn-warning">Güncelle</button>
+
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#DepartmanID').change(function () {
+            var selectedValue = $(this).val();
+            var errorSpan = $('#deparmanerror');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir departman seçin.");
+            } else {
+                errorSpan.text(""); // Hata mesajını temizle
+            }
+        });
+
+        // Form gönderildiğinde kontrolü yap
+        $('form').submit(function (e) {
+            var selectedValue = $('#DepartmanID').val();
+            var errorSpan = $('#deparmanerror');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir departman seçin.");
+                e.preventDefault(); // Formun gönderilmesini engelle
+            }
+        });
+    });
+</script>

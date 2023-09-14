@@ -1,0 +1,41 @@
+﻿@using Online_Tic_Oto.Models.Sınıflar
+@model List<Cariler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h4>Cari Listesi</h4>
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>ID</th>
+        <th>Adı Soyadı</th>
+        <th>Şehir</th>
+        <th>Mail</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        <th>Detay</th>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.CariID</td>
+            <td>@a.CariADI @a.CariSoyadı</td>
+            <td>@a.Sehirler.SehirADı</td>
+            <td>@a.CariMail</td>
+            <td><a href="#" class="btn btn-danger" onclick="confirmDelete('@a.CariID')">Sil</a></td>
+            <td><a href="/Cariler/CariGetir/@a.CariID" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Cariler/CariSatis/@a.CariID" class="btn btn-success" style="background-color:dimgrey">Detay</a></td>
+        </tr>
+    }
+</table>
+<a href="/Cariler/CariEkle" class="btn btn-primary">Cari Ekle</a>
+<script>
+    function confirmDelete(CariID) {
+        if (confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
+            // Kullanıcı "Evet" dediğinde silme işlemini gerçekleştirin
+            window.location.href = '/Cariler/CariSil/' + CariID;
+        }
+    }
+</script>
+

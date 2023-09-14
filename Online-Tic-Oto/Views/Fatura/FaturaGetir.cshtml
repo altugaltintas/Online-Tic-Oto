@@ -1,0 +1,63 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Faturalar
+@{
+    ViewBag.Title = "FaturaGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .form-title {
+        font-size: 24px;
+    }
+</style>
+<br />
+<h2>Fatura Güncelleme</h2>
+<br />
+@using (Html.BeginForm("FaturaGüncelle", "Fatura", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.FaturaID)
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Fatura Seri No </h4>
+        </div>
+        <div class="col-md-1">
+            <h4>@Html.DisplayFor(a => a.FaturaSeriSiraBirlesik, new { @class = "form-control" })</h4>
+        </div>
+    </div>
+    <br />
+    <label>Vergi Dairesi</label>
+    @Html.TextBoxFor(a => a.VeriDariesi, new { @class = "form-control" })
+    <br />
+    <label>Tarih</label>
+    @Html.TextBoxFor(a => a.Tarih, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+    <br />
+    <label>Saat</label>
+    @Html.TextBoxFor(a => a.Saat, new { @class = "form-control" })
+    <br />
+    <label>Teslim Eden</label>
+    @Html.TextBoxFor(a => a.TeslimEden, new { @class = "form-control" })
+    <br />
+    <label>Teslim Alan</label>
+    @Html.TextBoxFor(a => a.TeslimAlan, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-warning">Güncelle</button>
+
+}
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+
+        // Tarih alanına jQuery UI Datepicker'ı bağlama
+        $("#Tarih").datepicker({
+            dateFormat: 'dd.mm.yy', // Tarih formatı
+            changeMonth: true,      // Ay seçiciyi göster
+            changeYear: true,       // Yıl seçiciyi göster
+        });
+
+
+    });
+</script>

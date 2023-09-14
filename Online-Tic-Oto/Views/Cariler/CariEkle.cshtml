@@ -1,0 +1,50 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Cariler
+@{
+    ViewBag.Title = "CariEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Yeni Cari </h2>
+<br />
+<form class="form-group" method="post">
+    <label>Adı</label>
+    @Html.TextBoxFor(a => a.CariADI, new { @class = "form-control" })
+    <br />
+    <label>Soyadı</label>
+    @Html.TextBoxFor(a => a.CariSoyadı, new { @class = "form-control" })
+    <br />
+    <label>Şehir</label>
+    @Html.DropDownListFor(a => a.SehirID, new SelectList(ViewBag.sehirler, "Value", "Text", null), "Şehir Secin", new { @class = "form-control", id = "SehirID" })
+    <span id="sehirerror" style="color: red;"></span>
+    <br />
+    <label>Mail</label>
+    @Html.TextBoxFor(a => a.CariMail, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#SehirID').change(function () {
+            var selectedValue = $(this).val();
+            var errorSpan = $('#sehirerror');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir şehir seçin.");
+            } else {
+                errorSpan.text(""); // Hata mesajını temizle
+            }
+        });
+
+        // Form gönderildiğinde kontrolü yap
+        $('form').submit(function (e) {
+            var selectedValue = $('#SehirID').val();
+            var errorSpan = $('#sehirerror');
+
+            if (selectedValue === "") {
+                errorSpan.text("Lütfen bir şehir seçin.");
+                e.preventDefault(); // Formun gönderilmesini engelle
+            }
+        });
+    });
+</script>

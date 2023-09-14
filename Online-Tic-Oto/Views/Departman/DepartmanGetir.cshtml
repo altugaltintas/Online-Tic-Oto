@@ -1,0 +1,18 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Departman
+@{
+    ViewBag.Title = "DepartmanGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2> Departman GÜncelle </h2>
+<br />
+@using (Html.BeginForm("DepartmanGuncelle", "Departman", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Departman Adı</label>
+        @Html.TextBoxFor(a => a.DepartmanADI, new { @class = "form-control" })
+        @Html.HiddenFor(a => a.DepartmanID)
+    </div>
+    <br />
+    <button class="btn btn-warning">Güncelle</button>
+}

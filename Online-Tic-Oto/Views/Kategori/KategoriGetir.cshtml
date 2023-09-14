@@ -1,0 +1,18 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Kategori
+@{
+    ViewBag.Title = "KategoriGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2> Kategori Güncelle </h2>
+<br />
+@using (Html.BeginForm("KategoriGüncelle", "Kategori", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Kategori Adı</label>
+        @Html.TextBoxFor(a => a.KategoriADI, new { @class = "form-control" })
+        @Html.HiddenFor(a=> a.KategoriID)
+    </div>    
+    <br />
+    <button class="btn btn-warning">Güncelle</button>
+}

@@ -1,0 +1,35 @@
+﻿@using Online_Tic_Oto.Models.Sınıflar
+@model List<Personel>
+@{
+    ViewBag.Title = "DepartmanDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+
+<br />
+<h2>Departman Detay </h2>
+<br />
+<ol class="breadcrumb mb-4" style="background-color: #f2f2f2; border-radius:10px; padding:10px;">
+    <li class="breadcrumb-item active" style="margin-left:10px;">   Departman Adı: @ViewBag.d</li>
+</ol>
+<table class="table table-hover">
+    <tr>
+        <th>Personel ID</th>
+        <th>Adı</th>
+        <th>Soyadı</th>
+        <th>Görsel</th>
+        <th>Satışlar</th>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.PesonelID</td>
+            <td>@a.PersonelAD</td>
+            <td>@a.PersonelSoyad</td>
+            <td>@a.PersonelGorsel</td>
+            <td><a href="/Departman/DepartmanPersonelSatis/@a.PesonelID" class="btn btn-outline-secondary">Satış Detay</a></td>
+        </tr>
+    }
+</table>
+

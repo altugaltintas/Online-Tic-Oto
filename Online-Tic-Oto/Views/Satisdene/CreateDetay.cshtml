@@ -1,0 +1,81 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.SatisDetay
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SalesDetail</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(a => a.SatisID)
+
+        <!-- Ürün alanı -->
+        <div id="yeniUrunlar" class="form-group">
+            <label>ÜRÜN</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UrunAD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UrunAD, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Yeni ürünler listesi -->
+        <div id="yeniUrunlerListesi"></div>
+
+        <!-- Yeni ürün eklemek için buton -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Yeni Ürün Ekle" id="yeniUrunEkle" class="btn btn-primary" />
+            </div>
+        </div>
+
+        <!-- Diğer kodlar ve Create butonu -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        var yeniUrunler = []; // Yeni ürünleri saklamak için bir dizi tanımlayın
+
+        $("#yeniUrunEkle").click(function () {
+            var yeniUrunHtml = '<div class="form-group">' +
+                '<label>YENİ ÜRÜN</label>' +
+                '<div class="col-md-10">' +
+                '<input type="text" name="YeniUrunlar" class="form-control yeni-urun" />' +
+                '</div>' +
+                '</div>';
+            $("#yeniUrunlar").append(yeniUrunHtml);
+        });
+
+        // Form gönderildiğinde, yeni ürünleri diziye ekleyin
+        $("form").submit(function (e) {
+            e.preventDefault(); // Formun otomatik gönderilmesini engelleyin
+
+            $(".yeni-urun").each(function () {
+                var yeniUrun = $(this).val();
+                if (yeniUrun) {
+                    yeniUrunler.push(yeniUrun);
+                }
+            });
+
+            // Diziyi bir alan olarak formun içine ekleyin
+            var yeniUrunlerHtml = '<input type="hidden" name="YeniUrunlar" value="' + yeniUrunler.join() + '" />';
+            $("#yeniUrunlerListesi").html(yeniUrunlerHtml);
+
+            // Şimdi formu gerçekten gönderin
+            $("form")[0].submit();
+        });
+    });
+</script>

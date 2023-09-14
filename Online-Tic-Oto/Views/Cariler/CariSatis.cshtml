@@ -1,0 +1,122 @@
+﻿@using Online_Tic_Oto.Models.Sınıflar
+@model List<SatisHaraket>
+@{
+    ViewBag.Title = "CariSatis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    /* Başlık sırasındaki sütun başlıkları için stil */
+    .dataTables thead th {
+        padding: 10px; /* Başlık hücrelerinin iç içe geçmesini engellemek için yeterli boşluk ekleyin */
+        background-color: #f2f2f2;
+        border-radius: 10px;
+    }
+
+    /* Sayfa gösterim seçenekleri için stil */
+    .dataTables_length {
+        margin-bottom: 30px; /* Sayfa gösterim seçeneklerini başlıklardan ayırmak için alt boşluk ekleyin */
+    }
+
+    /* Arama kutusu için stil */
+    .dataTables_filter {
+        margin-top: 10px; /* Arama kutusunu başlıklardan ayırmak için üst boşluk ekleyin */
+    }
+
+    /* Sayfalama kontrolleri için stil */
+    .dataTables_paginate {
+        margin-top: 10px; /* Sayfalama kontrollerini başlıklardan ayırmak için üst boşluk ekleyin */
+    }
+</style>
+<br />
+<h2>Cari Satis</h2>
+<br />
+<ol class="breadcrumb mb-4" style="background-color: #f2f2f2; border-radius:10px; padding:10px;">
+    <li class="breadcrumb-item active" style="margin-left:10px;">   Cari Adı: @ViewBag.c_baslk</li>
+</ol>
+<div class="card mb-4">
+    <div class="card-header">
+        Cari Listesi
+    </div>
+    <div class="card-body">
+        <div class="datatable-wrapper" datatable-loeading no-fotter sortable searchable fixed-colums>
+        </div>
+        <div class="datatable-container">
+            <table id="datatablesSimple" class="datatable-table table-striped">
+                <thead>
+                    <tr>
+                        <th>Satış ID</th>
+                        <th>Ürün</th>
+                        <th>Personel</th>
+                        <th>Adet</th>
+                        <th>Fiyat</th>
+                        <th>Toplam</th>
+                        <th>Tarih</th>
+                        <th>Yazdır</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model)
+                    {
+                        <tr>
+                            <td>@a.SatisID</td>
+                            <td>@a.Urun.UrunAD</td>
+                            <td>@a.Personel.PersonelAD</td>
+                            <td>@a.Adet</td>
+                            <td>@a.Fiyat</td>
+                            <td>@a.ToplamTutar</td>
+                            <td>@a.Tarih.ToString("dd.MM.yyyy")</td>
+                            <td><a href="#" class="btn btn-primary btn-sm">Yazdır</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<!-- DataTables Turkish Dil Dosyası -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/Turkish.json"></script>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+<!-- DataTables Başlatma Kodu -->
+<script>
+    $(document).ready(function () {
+        $('#datatablesSimple').DataTable({
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını etkinleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını etkinleştir"
+                }
+            },
+            "lengthMenu": [5, 10, 25, 50, 100], // Sayfa gösterim seçeneklerini burada tanımlayın
+            "pageLength": 10
+        });
+    });
+</script>
+
+
