@@ -29,6 +29,7 @@ namespace Online_Tic_Oto.Models.AppContext
         public DbSet<Urun> Uruns { get; set; }
         public DbSet<Sehirler> Sehirlers { get; set; }
         public DbSet<UrunDty2> urunDty2s { get; set; }
+        public DbSet<Yapılacaklar> Yapılacaklars { get; set; }
 
         public DbSet<Satis> Satis { get; set; }
         public DbSet<SatisDetay> SatisDetays { get; set; }

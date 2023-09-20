@@ -1,0 +1,46 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Yapılacaklar
+@{
+    ViewBag.Title = "GorevEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Gorev Ekle</h2>
+<br />
+<form class="form-group" method="post">
+    <label>Görev Başlığı</label>
+    @Html.TextBoxFor(a => a.YapBaslik, new { @class = "form-control" })
+    <br />
+    <label>Göre Detayı</label>
+    @Html.TextAreaFor(a => a.YapDetay, new { @class = "form-control" })
+    <br />   
+    <label>Bitiş Tarihi</label>
+    @Html.TextBoxFor(a => a.bitisTarih, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+    <br />
+    <label>Başlangıc Tarihi</label>
+    @Html.TextBoxFor(a => a.BaslangicTarih, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+
+        // Tarih alanına jQuery UI Datepicker'ı bağlama
+        $("#bitisTarih").datepicker({
+            dateFormat: 'dd.mm.yy', // Tarih formatı
+            changeMonth: true,      // Ay seçiciyi göster
+            changeYear: true,       // Yıl seçiciyi göster
+        });
+        $("#BaslangicTarih").datepicker({
+            dateFormat: 'dd.mm.yy', // Tarih formatı
+            changeMonth: true,      // Ay seçiciyi göster
+            changeYear: true,       // Yıl seçiciyi göster
+        });
+
+    });
+</script>

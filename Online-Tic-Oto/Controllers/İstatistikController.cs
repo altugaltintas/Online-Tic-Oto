@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using Online_Tic_Oto.Models.AppContext;
@@ -55,14 +56,14 @@ namespace Online_Tic_Oto.Controllers
             var deger11 = db.Uruns.Where(a => a.UrunAD.Contains("laptop")).ToList();
             ViewBag.d11 = deger11.Count();
 
-            var deger12 = db.Uruns.GroupBy(a=> a.Marka).OrderByDescending(a=>a.Count()).Select(a=> a.Key).FirstOrDefault();
+            var deger12 = db.Uruns.GroupBy(a => a.Marka).OrderByDescending(a => a.Count()).Select(a => a.Key).FirstOrDefault();
             ViewBag.d12 = deger12;
 
 
 
 
 
-            var deger13 = db.Uruns.Where(b=> b.UrunID==(db.SatisHarakets.GroupBy(a=> a.UrunID).OrderByDescending(a=> a.Count()).Select(a=>a.Key).FirstOrDefault())).Select(k=> k.UrunAD).FirstOrDefault();
+            var deger13 = db.Uruns.Where(b => b.UrunID == (db.SatisHarakets.GroupBy(a => a.UrunID).OrderByDescending(a => a.Count()).Select(a => a.Key).FirstOrDefault())).Select(k => k.UrunAD).FirstOrDefault();
             ViewBag.d13 = deger13;
 
             var deger14 = db.SatisHarakets.Sum(a => a.ToplamTutar).ToString();
@@ -71,27 +72,73 @@ namespace Online_Tic_Oto.Controllers
 
             DateTime buguntarih = DateTime.Today;
 
-            var deger15 = db.SatisHarakets.Count(a=>a.Tarih == buguntarih).ToString();
+            var deger15 = db.SatisHarakets.Count(a => a.Tarih == buguntarih).ToString();
             ViewBag.d15 = deger15;
 
-            var deger16 = db.SatisHarakets.Where(a => a.Tarih == buguntarih).Sum(a => a.ToplamTutar).ToString();
-            ViewBag.d16 = deger16;
+            //var deger16 = db.SatisHarakets.Where(a => a.Tarih == buguntarih).Sum(a => a.ToplamTutar).ToString();
+            var deger16 = db.SatisHarakets.Where(a => a.Tarih == buguntarih).Sum(a => (decimal?)a.ToplamTutar) ?? 0M;
 
+            
+                ViewBag.d16 = deger16;
 
 
             return View();
-
-
-
         }
 
 
         public ActionResult KolayTablolar()
         {
 
+            var sorgu = from c in db.Carilers
+                        join s in db.Sehirlers on c.SehirID equals s.SehirID
+                        group c by s.SehirADı into g
+                        select new GrupSinif
+                        {
+                            Sehir = g.Key,
+                            Sayi = g.Count()
+                        };
 
+            return View(sorgu.ToList());
+        }
 
-            return View();
+        public PartialViewResult Partial1()
+        {
+            var sorgu2 = from a in db.Personels
+                         join d in db.Departmen on a.DepartmanID equals d.DepartmanID
+                         group new { a, d } by a.DepartmanID into g
+                         select new GrupSinif2
+                         {
+                             Departman = g.Key,
+                             DepartmanAdi = g.FirstOrDefault().d.DepartmanADI, // Departman adını buradan alıyoruz
+                             Sayi = g.Count()
+                         };
+
+            return PartialView(sorgu2.ToList());
+        }
+
+        public PartialViewResult Partial2()
+        {
+
+            var sorgu2 = db.Carilers.ToList();
+            return PartialView(sorgu2);
+        }
+
+        public PartialViewResult Partial3()
+        {
+
+            var sorgu3 = db.Uruns.ToList();
+            return PartialView(sorgu3);
+        }
+        public PartialViewResult Partial4()
+        {
+            var sorgu4 = from a in db.Uruns                         
+                         group a by a.Marka into g
+                         select new GrupSinif3
+                         {
+                             Marka = g.Key,
+                             Sayi = g.Count()
+                         };
+            return PartialView(sorgu4);
         }
     }
 }

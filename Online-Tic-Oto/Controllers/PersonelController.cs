@@ -73,5 +73,11 @@ namespace Online_Tic_Oto.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult PersonelYeniList()
+        {
+            var persList = db.Personels.ToList();
+            return View(persList);
+        }
     }
 }

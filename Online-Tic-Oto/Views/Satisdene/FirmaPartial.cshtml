@@ -1,0 +1,9 @@
+﻿
+@model Online_Tic_Oto.Models.Sınıflar.Satis
+<h3>Firma Bilgisi Girişi</h3>
+@using (Html.BeginForm("FirmaPartial", "Satisdene", FormMethod.Post))
+{
+    @Html.LabelFor(model => model)
+    @Html.TextBoxFor(model => model.FirmaAD)
+    <input type="submit" value="Firma Bilgisini Kaydet" />
+}

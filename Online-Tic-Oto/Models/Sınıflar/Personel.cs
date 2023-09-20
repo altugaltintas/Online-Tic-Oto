@@ -25,6 +25,16 @@ namespace Online_Tic_Oto.Models.Sınıflar
 
 
         [Column(TypeName = "Varchar")]
+        [StringLength(30)]
+        public string PersonelTelefon { get; set; }
+
+
+        [Column(TypeName = "Varchar")]
+        [StringLength(200)]
+        public string PersonelAdres { get; set; }
+
+
+        [Column(TypeName = "Varchar")]
         [StringLength(250)]
         public string PersonelGorsel { get; set; }
 

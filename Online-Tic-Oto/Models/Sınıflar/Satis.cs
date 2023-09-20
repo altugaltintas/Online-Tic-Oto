@@ -17,8 +17,11 @@ namespace Online_Tic_Oto.Models.Sınıflar
         [StringLength(30)]
         public string FirmaAD { get; set; }
 
+        public List<SatisDetay> satisDetays { get; set; }
 
-      
-
+        public Satis()
+        {
+            satisDetays = new List<SatisDetay>();
+        }
     }
 }

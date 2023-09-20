@@ -1,0 +1,19 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Satis
+
+<!-- Satış bilgileri girişi formu -->
+@using (Html.BeginForm("_CreateSatisPartial", "Satisdene", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirmaAD, "Firma Adı")
+        @Html.EditorFor(model => model.FirmaAD, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.FirmaAD, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- Diğer satış bilgileri alanları eklenebilir -->
+
+    <div class="form-group">
+        <input type="submit" value="Satış Oluştur" class="btn btn-primary" />
+    </div>
+}

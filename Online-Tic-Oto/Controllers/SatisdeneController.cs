@@ -14,76 +14,46 @@ namespace Online_Tic_Oto.Controllers
         Context db = new Context();
 
 
+        private List<Satis> _satışlar = new List<Satis>();
+        private int _sonSatışID = 1;
 
-        // GET: Satış/YeniSatış
-        public ActionResult Create()
+        // Satışlar listesini görüntüleme
+        public ActionResult Index()
         {
-            return View();
+            return View(_satışlar);
         }
 
-        // Satış bilgilerini kaydeder
+        // Firma bilgisi giriş için PartialView
+        public ActionResult FirmaPartial()
+        {
+            return PartialView();
+        }
+
+        // Ürün bilgisi giriş için PartialView
+        public ActionResult ÜrünPartial()
+        {
+            return PartialView();
+        }
+
+        // Firma bilgisini kaydetme
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Satis sales)
+        public ActionResult FirmaPartial(Satis satış)
         {
-            if (ModelState.IsValid)
-            {
-                db.Satis.Add(sales);
-                db.SaveChanges();
-                return RedirectToAction("CreateDetay", "SatisDene", new { SatisID = sales.ID });
-            }
-            return View(sales);
-
-
+            satış.ID = _sonSatışID++;
+            _satışlar.Add(satış);
+            return RedirectToAction("ÜrünPartial", new { id = satış.ID });
         }
 
-
-
-
-        public ActionResult CreateDetay(int SatisID)
-        {
-            List<SelectListItem> urunlist = db.SatisDetays.Where(a => a.SatisID == SatisID)
-            .Select(k => new SelectListItem
-            {
-                Value = k.ID.ToString(),
-                Text = k.UrunAD
-            })
-            .ToList();
-
-            ViewBag.urunlist2 = urunlist;
-
-
-
-
-
-            ViewBag.SalesId = SatisID;
-            return View();
-        }
-
-
+        // Ürün bilgisini kaydetme
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateDetay(SatisDetay salesDetail)
+        public ActionResult ÜrünPartial(SatisDetay satışDetay)
         {
-
-
-            if (ModelState.IsValid)
+            var satış = _satışlar.Find(s => s.ID == satışDetay.SatisID);
+            if (satış != null)
             {
-                db.SatisDetays.Add(salesDetail);
-                db.SaveChanges();
-                return RedirectToAction("CreateDetay", new { SatisID = salesDetail.SatisID });
+                satış.satisDetays.Add(satışDetay);
             }
-            ViewBag.SalesId = salesDetail.SatisID;
-            return View(salesDetail);
-            //    if (ModelState.IsValid)
-            //    {
-            //        db.SatisDetays.Add(salesDetail);
-            //        db.SaveChanges();
-            //        return RedirectToAction("CreateDetay", new { salesId = salesDetail.SatisID });
-            //    }
-            //    ViewBag.SalesId = salesDetail.SatisID;
-            //    return View(salesDetail);
-            //}
+            return RedirectToAction("Index");
         }
     }
 }

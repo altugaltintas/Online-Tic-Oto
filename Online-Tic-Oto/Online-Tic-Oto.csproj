@@ -139,6 +139,7 @@
     <Compile Include="Controllers\SatisdeneController.cs" />
     <Compile Include="Controllers\UrunController.cs" />
     <Compile Include="Controllers\UrunDetayController.cs" />
+    <Compile Include="Controllers\YapilacakController.cs" />
     <Compile Include="Controllers\İstatistikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -152,6 +153,9 @@
     <Compile Include="Models\Sınıflar\FaturaKalem.cs" />
     <Compile Include="Models\Sınıflar\Faturalar.cs" />
     <Compile Include="Models\Sınıflar\Gider.cs" />
+    <Compile Include="Models\Sınıflar\GrupSinif2.cs" />
+    <Compile Include="Models\Sınıflar\GrupSinif.cs" />
+    <Compile Include="Models\Sınıflar\GrupSinif3.cs" />
     <Compile Include="Models\Sınıflar\Kategori.cs" />
     <Compile Include="Models\Sınıflar\Personel.cs" />
     <Compile Include="Models\Sınıflar\Satis.cs" />
@@ -161,6 +165,7 @@
     <Compile Include="Models\Sınıflar\Urun.cs" />
     <Compile Include="Models\Sınıflar\UrunDty2.cs" />
     <Compile Include="Models\Sınıflar\UrunDty3.cs" />
+    <Compile Include="Models\Sınıflar\Yapılacaklar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2796,6 +2801,18 @@
     <Content Include="Views\İstatistik\KolayTablolar.cshtml" />
     <Content Include="Views\Satisdene\Create.cshtml" />
     <Content Include="Views\Satisdene\CreateDetay.cshtml" />
+    <Content Include="Views\İstatistik\Partial1.cshtml" />
+    <Content Include="Views\Satisdene\_CreateSatisPartial.cshtml" />
+    <Content Include="Views\Satisdene\_CreateSatisDetayPartial.cshtml" />
+    <Content Include="Views\Satisdene\Index.cshtml" />
+    <Content Include="Views\Satisdene\FirmaPartial.cshtml" />
+    <Content Include="Views\Satisdene\ÜrünPartial.cshtml" />
+    <Content Include="Views\İstatistik\Partial2.cshtml" />
+    <Content Include="Views\İstatistik\Partial3.cshtml" />
+    <Content Include="Views\İstatistik\Partial4.cshtml" />
+    <Content Include="Views\Personel\PersonelYeniList.cshtml" />
+    <Content Include="Views\Yapilacak\Index.cshtml" />
+    <Content Include="Views\Yapilacak\GorevEkle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

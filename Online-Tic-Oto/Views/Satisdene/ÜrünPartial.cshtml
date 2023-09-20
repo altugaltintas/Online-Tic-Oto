@@ -1,0 +1,10 @@
+﻿
+@model Online_Tic_Oto.Models.Sınıflar.SatisDetay
+<h3>Ürün Bilgisi Girişi</h3>
+@using (Html.BeginForm("ÜrünPartial", "Satisdene", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.SatisID)
+    @Html.LabelFor(model => model.UrunAD)
+    @Html.TextBoxFor(model => model.UrunAD)
+    <input type="submit" value="Ürün Bilgisini Kaydet" />
+}

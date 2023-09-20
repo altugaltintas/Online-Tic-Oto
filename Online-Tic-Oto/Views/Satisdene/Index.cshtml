@@ -1,0 +1,25 @@
+﻿@model List<Online_Tic_Oto.Models.Sınıflar.Satis>
+<h2>Satış Sistemi</h2>
+@Html.Action("FirmaPartial")
+@Html.Action("ÜrünPartial")
+<h3>Satışlar</h3>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Firma</th>
+        <th>Ürün</th>
+    </tr>
+    @foreach (var satış in Model)
+    {
+        <tr>
+            <td>@satış.ID</td>
+            <td>@satış.FirmaAD</td>
+            <td>
+                @foreach (var detay in satış.satisDetays)
+                {
+                    @detay.UrunAD<br />
+                }
+            </td>
+        </tr>
+    }
+</table>
