@@ -32,6 +32,7 @@ namespace Online_Tic_Oto.Controllers
                 Text = k.SehirADı
             })
             .ToList();
+           
 
             ViewBag.sehirler = sehirList;
             return View();

@@ -17,7 +17,7 @@ namespace Online_Tic_Oto.Controllers
         {
             UrunDty3 urunDty3 = new UrunDty3();
 
-            urunDty3.deger1 = db.Uruns.Where(a => a.UrunID == 18).ToList();
+            urunDty3.deger1 = db.Uruns.Where(a => a.UrunID == 1 ).ToList();
             urunDty3.deger2 = db.urunDty2s.Where(a => a.DetayID == 1).ToList();   
 
             //urun ekranındaki detay butonu basıcna burası açılsın oradaki ID bilgisi ile vs yapılabilir

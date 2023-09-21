@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Online_Tic_Oto.Models.AppContext;
+
 
 namespace Online_Tic_Oto.Models.Sınıflar
 {
     public class Cariler
     {
+
 
         public Cariler()
         {
@@ -19,13 +22,13 @@ namespace Online_Tic_Oto.Models.Sınıflar
         public int CariID { get; set; }
 
         [Column(TypeName = "Varchar")]
-        [StringLength(30,ErrorMessage ="En fazla 30 karakter yazabilirsin")]
+        [StringLength(30, ErrorMessage = "En fazla 30 karakter yazabilirsin")]
         [Required(ErrorMessage = "Bu Alanı Boş geçemezsiniz")]
         public string CariADI { get; set; }
 
         [Column(TypeName = "Varchar")]
-        [StringLength(30,ErrorMessage ="En fazla 30 karakter yazabilirsin")]
-        [Required(ErrorMessage ="Bu Alanı Boş geçemezsiniz")]
+        [StringLength(30, ErrorMessage = "En fazla 30 karakter yazabilirsin")]
+        [Required(ErrorMessage = "Bu Alanı Boş geçemezsiniz")]
         public string CariSoyadı { get; set; }
 
         [Column(TypeName = "Varchar")]
@@ -35,10 +38,18 @@ namespace Online_Tic_Oto.Models.Sınıflar
         public bool Durum { get; set; }
 
 
+
+        [Column(TypeName = "Varchar")]
+        [StringLength(50)]
+        public string CariSifre { get; set; }
+
+
         public int SehirID { get; set; }
 
         public virtual Sehirler Sehirler { get; set; }
 
         public ICollection<SatisHaraket> SatisHarakets { get; set; }
+
+      
     }
 }

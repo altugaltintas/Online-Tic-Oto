@@ -1,0 +1,38 @@
+﻿@model Online_Tic_Oto.Models.Sınıflar.Cariler
+<style>
+    /* Input alanı için özel bir stil tanımlayın */
+    #SehirID {
+        width: 70px;
+        height:30px;/* İstenilen genişliği ayarlayın */
+        font-size: 16px; /* Yazı tipi boyutunu ayarlayın */
+        /* Diğer stil özelliklerini burada ekleyebilirsiniz */
+    }
+</style>
+
+
+<div class="login-form login-form-left">
+    <div class="agile-row">
+        <h3>Yeni Cari Kayıt</h3>
+        <div class="login-agileits-top">
+            <form class="form-group" method="post">
+                <input type="text" class="name" name="CariADI" Placeholder="Adınız" required="" />
+                <input type="text" class="name" name="CariSoyadı" Placeholder="Soyadınız" required="" />
+                <input type="email" class="email" name="CariMail" Placeholder="Email" required="" />                
+                <label > Şehir Plakası Giriniz </label>
+
+                <br />
+                <br />
+                <input type="number"  id="SehirID" class="name" name="SehirID" Placeholder="Plaka" required min="1" max="81" />
+
+                <br />
+                <br />
+                <input type="password" class="password" name="CariSifre" Placeholder="Şifre" required="" />
+                <div class="login-check">
+                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Kuralları okudum <a href="#"> &amp; Kabul Ediyorum</a></label>
+                </div>
+                <input type="submit" value="Kayıt Ol" />
+            </form>
+        </div>
+    </div>
+</div>
+
